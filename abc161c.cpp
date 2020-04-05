@@ -7,21 +7,18 @@ int main(void){
     int64_t k;
     cin >> n >> k;
 
-    int64_t temp0;
-    int64_t temp1;
+    int64_t ans0;
+    int64_t ans1;
+    int64_t div;
     int64_t i;
 
-    i=1;
-    
-    while (n > k){
-        k *= i;
-        i++;
-    }
+    // そのままループさせたらTLEになることはわかってただけヨシ！
+    div = n/k;
 
-    temp0 = abs(n-k*(i));
-    temp1 = abs(n-k*(i-1));
+    ans0 = n - k*div;           // 必ず正
+    ans1 = abs(n - k*(div+1));  // 負値なので絶対値を取る
 
-    cout << min(temp0, temp1) << endl;
+    cout << min(ans0, ans1) << endl;
 
     return 0;
 }
