@@ -1,12 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(void){
+int main(){
 
-    int a,b;
-    cin >> a >> b;
+    int count_true=0, count_false=0;
 
-    cout << a+b;
+    bitset<8> a("01010101");
+
+    a <<= 1;
+
+    cout << a << endl;
 
     return 0;
 }
