@@ -189,6 +189,10 @@ int vec_f(){
     int array_count = 0;
     int new_var_flg = 0;
 
+    for (int i=0; i<ans_vec.size(); i++){
+        ans_vec.at(i) = 0;
+    }
+
     while(order_temp != ';'){
         cin >> order_temp;
         if (isdigit(order_temp)){
@@ -275,11 +279,15 @@ int print_vec_f(){
     num_buf = 0;
     order_temp = 0;
     op_buf = 0;
-    name_memo = '0';
+    name_memo = '0';;
 
     int array_flg = 0;
     int array_count = 0;
     int new_var_flg = 0;
+
+    for (int i=0; i<ans_vec.size(); i++){
+        ans_vec.at(i) = 0;
+    }
 
     while(order_temp != ';'){
         cin >> order_temp;
