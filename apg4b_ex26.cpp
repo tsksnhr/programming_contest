@@ -84,7 +84,7 @@ int int_f(void){
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
             name_count++;
-            if (name_count == 2){
+            if (name_count >= 2){
                 name_memo = name;
             }
             name = order_temp;
@@ -95,7 +95,7 @@ int int_f(void){
         }
     }
 
-    if (name_count == 2) var_map[name_memo] = ans_num;        // 変数をmapに保存
+    if (name_count >= 2) var_map[name_memo] = ans_num;        // 変数をmapに保存
     else var_map[name] = ans_num;
 
     return 0;
@@ -133,7 +133,7 @@ int print_int_f(void){
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
             name_count++;
-            if (name_count == 2){
+            if (name_count >= 2){
                 name_memo = name;
             }
             name = order_temp;
@@ -159,13 +159,13 @@ int print_int_f(void){
         }
     }
 
-    if (name_count == 2) {
-        var_map[name_memo] = ans_num;        // 変数をmapに保存
-        cout << var_map[name_memo] << endl;
-    }
-    else {
+//    if (name_count == 2) {
+//        var_map[name_memo] = ans_num;        // 変数をmapに保存
+//        cout << var_map[name_memo] << endl;
+//    }
+//    else {
         cout << ans_num << endl;
-    }
+//    }
 
     return 0;
 }
@@ -206,7 +206,7 @@ int vec_f(){
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
             name_count++;
-            if (name_count == 2){
+            if (name_count >= 2){
                 name_memo = name;
             }
             name = order_temp;
@@ -258,7 +258,7 @@ int vec_f(){
         }
     }
 
-    if (name_count == 2) vec_map[name_memo] = ans_vec;        // 変数をmapに保存
+    if (name_count >= 2) vec_map[name_memo] = ans_vec;        // 変数をmapに保存
     else vec_map[name] = ans_vec;
 
     return 0;
@@ -305,7 +305,7 @@ int print_vec_f(){
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
             name_count++;
-            if (name_count == 2){
+            if (name_count >= 2){
                 name_memo = name;
             }
             name = order_temp;
