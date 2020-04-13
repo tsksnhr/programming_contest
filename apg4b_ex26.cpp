@@ -59,8 +59,9 @@ int int_f(void){
     num_buf = 0;
     ans_num = 0;
     order_temp = 0;
+    name_memo = '0';
 
-    int name_count = 0;
+    int new_var_flg = 0;
 
     while(order_temp != ';'){
         cin >> order_temp;
@@ -83,9 +84,9 @@ int int_f(void){
             }
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
-            name_count++;
-            if (name_count >= 2){
+            if (new_var_flg == 1){      //  nameが更新される前に==の判定を実施したい
                 name_memo = name;
+                new_var_flg = 0;
             }
             name = order_temp;
         }
@@ -93,10 +94,13 @@ int int_f(void){
             op_buf = order_temp;
             op_flg = 1;             // 符号保存を表すフラグ
         }
+        else if (order_temp == '='){
+            new_var_flg = 1;
+        }
     }
 
-    if (name_count >= 2) var_map[name_memo] = ans_num;        // 変数をmapに保存
-    else var_map[name] = ans_num;
+    if (name_memo != '0') var_map[name_memo] = ans_num;        // 変数をmapに保存
+//    else var_map[name] = ans_num;
 
     return 0;
 }
@@ -108,8 +112,9 @@ int print_int_f(void){
     ans_num = 0;
     order_temp = 0;
     op_buf = 0;
+    name_memo = '0';
 
-    int name_count = 0;
+    int new_var_flg = 0;
 
     while(order_temp != ';'){
         cin >> order_temp;
@@ -132,9 +137,9 @@ int print_int_f(void){
             }
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
-            name_count++;
-            if (name_count >= 2){
+            if (new_var_flg == 1){
                 name_memo = name;
+                new_var_flg = 0;
             }
             name = order_temp;
 
@@ -157,16 +162,18 @@ int print_int_f(void){
             op_buf = order_temp;
             op_flg = 1;             // 符号保存を表すフラグ
         }
+        else if (order_temp == '=') {
+            new_var_flg = 1;
+        }
     }
 
-//    if (name_count == 2) {
-//        var_map[name_memo] = ans_num;        // 変数をmapに保存
-//        cout << var_map[name_memo] << endl;
-//    }
-//    else {
+    if (name_memo != '0') {
+        var_map[name_memo] = ans_num;        // 変数をmapに保存
+        cout << var_map[name_memo] << endl;
+    }
+    else {
         cout << ans_num << endl;
-//    }
-
+    }
     return 0;
 }
 
@@ -176,16 +183,14 @@ int vec_f(){
     num_buf = 0;
     order_temp = 0;
     op_buf = 0;
+    name_memo = '0';
 
     int array_flg = 0;
     int array_count = 0;
-    int name_count = 0;
+    int new_var_flg = 0;
 
     while(order_temp != ';'){
         cin >> order_temp;
-//        cout << "order_temp = " << order_temp << endl;
-//        cout << "op_flg = " << op_flg << endl;
-//        cout << "op_buf = " << op_buf << endl;
         if (isdigit(order_temp)){
             order_temp -= 48;           //  char型で受け取った整数をint型で計算できるよう変換('0'→0)
             if (op_flg == 0) {
@@ -194,20 +199,17 @@ int vec_f(){
 
             // 演算子によって処理を変更
             if (op_buf == '+'){
-//                cout << "called" << endl;
-//                cout << "array_count = " << array_count << endl;
-                ans_vec.at(array_count) += order_temp;  //  こいつが何やらエラーを吐いている
-//                cout << "called" << endl;
+                ans_vec.at(array_count) += order_temp;  
             }
             else if (op_buf == '-'){
                 ans_vec.at(array_count) -= order_temp;
             }
             array_count++;
         }
-        else if ((order_temp <= 'z') && (order_temp >= 'a')){
-            name_count++;
-            if (name_count >= 2){
+        else if ((order_temp <= 'z') && (order_temp >= 'a')) {
+            if (new_var_flg == 1){
                 name_memo = name;
+                new_var_flg = 0;
             }
             name = order_temp;
 
@@ -256,10 +258,13 @@ int vec_f(){
             array_flg = 0;
             array_count = 0;
         }
+        else if (order_temp == '='){
+            new_var_flg = 1;
+        }
     }
 
-    if (name_count >= 2) vec_map[name_memo] = ans_vec;        // 変数をmapに保存
-    else vec_map[name] = ans_vec;
+    if (name_memo != '0') vec_map[name_memo] = ans_vec;        // 変数をmapに保存
+//    else vec_map[name] = ans_vec;
 
     return 0;
 }
@@ -270,18 +275,14 @@ int print_vec_f(){
     num_buf = 0;
     order_temp = 0;
     op_buf = 0;
+    name_memo = '0';
 
     int array_flg = 0;
     int array_count = 0;
-    int name_count=0;
-    int save_flg = 0;
+    int new_var_flg = 0;
 
     while(order_temp != ';'){
         cin >> order_temp;
-//        cout << "order_temp = " << order_temp << endl;
-//        cout << "op_flg = " << op_flg << endl;
-//        cout << "op_buf = " << op_buf << endl;
-//        cout << "array_flg = " << array_flg << endl;
         if (isdigit(order_temp)){
             order_temp -= 48;           //  char型で受け取った整数をint型で計算できるよう変換('0'→0)
 
@@ -292,10 +293,7 @@ int print_vec_f(){
             if (op_flg == 1){
                 // 演算子によって処理を変更
                 if (op_buf == '+'){
-//                    cout << "called" << endl;
-//                    cout << "array_count = " << array_count << endl;
-                    ans_vec.at(array_count) += order_temp;              //  ans_vecに値が入っていない？
-//                    cout << "called" << endl;
+                    ans_vec.at(array_count) += order_temp;              
                 }
                 else if (op_buf == '-'){
                     ans_vec.at(array_count) -= order_temp;
@@ -304,9 +302,9 @@ int print_vec_f(){
             }
         }
         else if ((order_temp <= 'z') && (order_temp >= 'a')){
-            name_count++;
-            if (name_count >= 2){
+            if (new_var_flg == 1){
                 name_memo = name;
+                new_var_flg = 0;
             }
             name = order_temp;
 
@@ -343,8 +341,6 @@ int print_vec_f(){
                 if (array_flg == 1) ans_vec.push_back(var_map[name]);       // 配列の中であれば
                 else {
                     ans_vec = vec_map[name];                               // 配列の外であれば
-//                    cout << "ans_vec got value" << endl;
-//                    cout << "ans_vec.at(0) = " << vec_map[name].at(0) << endl; 
                 }
             }
         }
@@ -358,6 +354,9 @@ int print_vec_f(){
         else if ((order_temp == ']')) {
             array_flg = 0;
             array_count = 0;
+        }
+        else if (order_temp == '='){
+            new_var_flg = 1;
         }
     }
 
