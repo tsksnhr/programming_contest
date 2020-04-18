@@ -87,7 +87,20 @@ int int_f(void){
             name = order_temp;
 
             //  変数呼び出しの時の処理が何も入っていない・・・そりゃ結果違うわ
-
+            if (op_flg == 1) {
+                num_buf = var_map[name];   // 演算子が出ていればバッファに保存
+ 
+                // 演算子によって処理を変更
+                if (op_buf == '+'){
+                    ans_num += num_buf;
+                }
+                else if (op_buf == '-'){
+                    ans_num -= num_buf;
+                }
+            }
+            else {
+                ans_num = var_map[name];               // 演算子が出ていなければ最終値に保存
+            }
         }
         else if ((order_temp == '+') || (order_temp == '-')) {
             op_buf = order_temp;
