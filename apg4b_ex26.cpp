@@ -114,6 +114,9 @@ int int_f(void){
  
     if (name_memo != '0') var_map[name_memo] = ans_num;        // 変数をmapに保存
 //    else var_map[name] = ans_num;
+//    cout << "degug: " << name  << " = " << var_map[name] << endl;
+//    cout << "degug: " << name_memo  << " = " << ans_num << endl;
+
  
     return 0;
 }
@@ -225,11 +228,11 @@ int vec_f(){
  
             if (op_flg == 1) {
                 if (array_flg == 1) {
-                    order_temp = var_map[name];   //  配列の中で変数が呼ばれた際には配列の要素として追加
+                    num_buf = var_map[name];   //  配列の中で変数が呼ばれた際には配列の要素として追加
                 }
                 else  vec_buf = vec_map[name];                          //  配列の外で変数が呼ばれた際には配列として追加
  
-                if (array_flg != 1) {   //  配列内でなければ計算を実施
+                if (array_flg != 1) {   //  配列内でなければ配列同士の計算を実施
                     for (int i=0; i<vec_buf.size(); i++){       // 配列の要素数だけループ
  
                         // 演算子によって処理を変更
@@ -241,13 +244,13 @@ int vec_f(){
                         }
                     }
                 }
-                else{
+                else{   //  配列内で文字に格納された変数が呼ばれた場合
                     // 演算子によって処理を変更
                     if (op_buf == '+'){
-                        ans_vec.at(array_count) += order_temp;
+                        ans_vec.at(array_count) += num_buf;
                     }
                     else if (op_buf == '-'){
-                        ans_vec.at(array_count) -= order_temp;
+                        ans_vec.at(array_count) -= num_buf;
                     }
                     array_count++;
                 }                
@@ -276,7 +279,14 @@ int vec_f(){
  
     if (name_memo != '0') vec_map[name_memo] = ans_vec;        // 変数をmapに保存
 //    else vec_map[name] = ans_vec;
- 
+
+/*
+    cout << "debug: " << name_memo << " = [ ";
+    for (int x: vec_map[name_memo]){
+        cout << x << " ";
+    }
+    cout << "]" << endl;
+*/ 
     return 0;
 }
  
@@ -308,7 +318,7 @@ int print_vec_f(){
             if (op_flg == 1){
                 // 演算子によって処理を変更
                 if (op_buf == '+'){
-                    ans_vec.at(array_count) += order_temp;              //  ans_vecに値が入っていない？
+                    ans_vec.at(array_count) += order_temp;              // 
                 }
                 else if (op_buf == '-'){
                     ans_vec.at(array_count) -= order_temp;
@@ -321,7 +331,7 @@ int print_vec_f(){
  
             if (op_flg == 1) {
                 if (array_flg == 1) {
-                    order_temp = var_map[name]; 
+                    num_buf = var_map[name]; 
                 }
                 else  vec_buf = vec_map[name];                          //  配列の外で変数が呼ばれた際には配列として追加
  
@@ -340,10 +350,10 @@ int print_vec_f(){
                 else{
                     // 演算子によって処理を変更
                     if (op_buf == '+'){
-                        ans_vec.at(array_count) += order_temp;
+                        ans_vec.at(array_count) += num_buf;
                     }
                     else if (op_buf == '-'){
-                        ans_vec.at(array_count) -= order_temp;
+                        ans_vec.at(array_count) -= num_buf;
                     }
                     array_count++;
                 }                
@@ -371,7 +381,9 @@ int print_vec_f(){
             name_memo = name;
         }
     }
- 
+
+//    cout << "degug: " << name  << " = " << var_map[name] << endl;
+
     cout << "[ ";
     for(int x: ans_vec){
         cout << x << " ";
