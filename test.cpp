@@ -1,15 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int64_t modpow(int64_t a, int64_t dim, int64_t div);
+double expectation(double num, double num_mem);
 
 int main(){
 
-    int a, dim, div, ans;
-    cin >> a >> dim;
-    div = 1e9 + 7;
+    int a;
+    double ans;
+    cin >> a;
 
-    ans = modpow(a, dim, div);
+    ans = expectation(a, a);
 
     cout << ans << endl;
 
@@ -17,15 +17,12 @@ int main(){
 }
 
 //  繰り返し2乗法
-int64_t modpow(int64_t a, int64_t dim, int64_t div){
+double expectation(double num, double num_mem){
 
-    if (dim == 1){
-        return a%div; 
-    }
-    else if (dim%2 != 0){
-        return ( a*modpow(a, dim-1, div) )%div;
+    if (num == 1){
+        return 1/num_mem;
     }
     else{
-        return ( modpow(a, dim/2, div) * modpow(a, dim/2, div) )%div;
+        return (num/num_mem) + expectation(num-1, num_mem);
     }
 }
