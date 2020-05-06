@@ -5,24 +5,29 @@ double expectation(double num, double num_mem);
 
 int main(){
 
-    int a;
-    double ans;
-    cin >> a;
+    int N, k, temp, digit, first, last;
+    cin >> N;
 
-    ans = expectation(a, a);
+    for (k=1; k<=N; k++){
+        digit = 0;
+        temp = k;
 
-    cout << ans << endl;
+        while (temp>0){
+            temp /= 10;
+            digit++;
+        }
 
-    return 0;
-}
+        last = k%10;
+        if (digit > 1){
+            first = k/(10*(digit-1));  //   アホやん
+        }
+        else{
+            first = last;
+        }
 
-//  繰り返し2乗法
-double expectation(double num, double num_mem){
-
-    if (num == 1){
-        return 1/num_mem;
+        cout << "k = " << k << endl;
+        cout << "digit = " << digit << endl;
+        cout << first << " " << last << endl;
     }
-    else{
-        return (num/num_mem) + expectation(num-1, num_mem);
-    }
+
 }
