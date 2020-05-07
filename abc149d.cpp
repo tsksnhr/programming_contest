@@ -41,6 +41,9 @@ int main(){
             else if ((i+k<n) && (t.at(i) == 'r') && (t_alt.at(i-k) == 'p') && (t.at(i+k) == 's')){
                 t_alt.push_back('s');   //  rとpはダメ
             }
+            else if ((i+k<n) && (t.at(i) == 'r') && (t_alt.at(i-k) == 'p') && (t.at(i+k) == 'p')){
+                t_alt.push_back('r');   //  sとpはダメ
+            }
             else if (t.at(i) == 'r'){
                 t_alt.push_back('p');
                 sum += p;
@@ -55,6 +58,9 @@ int main(){
             }
             else if ((i+k<n) && (t.at(i) == 's') && (t_alt.at(i-k) == 'r') && (t.at(i+k) == 'p')){
                 t_alt.push_back('p');   //  rとsはダメ
+            }
+            else if ((i+k<n) && (t.at(i) == 's') && (t_alt.at(i-k) == 'r') && (t.at(i+k) == 'r')){
+                t_alt.push_back('s');   //  rとpはダメ
             }
             else if (t.at(i) == 's'){
                 t_alt.push_back('r');
@@ -71,6 +77,9 @@ int main(){
             else if ((i+k<n) && (t.at(i) == 'p') && (t_alt.at(i-k) == 's') && (t.at(i+k) == 'p')){
                 t_alt.push_back('r');   //  sはダメ
             }
+            else if ((i+k<n) && (t.at(i) == 'p') && (t_alt.at(i-k) == 's') && (t.at(i+k) == 's')){
+                t_alt.push_back('p');   //  sとrはダメ
+            }
             else if (t.at(i) == 'p'){
                 t_alt.push_back('s');
                 sum += s;
@@ -80,7 +89,7 @@ int main(){
         }
     }
 
-    cout << t_alt << endl;
+//    cout << t_alt << endl;
     cout << sum << endl;
     return 0;
 }
