@@ -12,7 +12,7 @@ int main(){
         cin >> a;
 
         for (int j=0; j<a; j++){
-            // syori
+            //  処理(緑diffなので後ほど)
         }
     }
 
