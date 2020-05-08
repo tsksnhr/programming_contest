@@ -13,7 +13,8 @@ int counter(int num){
 
 int main(){
 
-    int n = 0b11010101; //  0bで2進数表示
+//    int n = 0b11110000; //  0bで2進数表示
+    int n = 240;
     int cnt = 0;
     cnt = counter(n);
     cout << cnt << endl;
