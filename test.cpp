@@ -1,33 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-double expectation(double num, double num_mem);
+vector<int> a(10);
 
 int main(){
 
-    int N, k, temp, digit, first, last;
-    cin >> N;
-
-    for (k=1; k<=N; k++){
-        digit = 0;
-        temp = k;
-
-        while (temp>0){
-            temp /= 10;
-            digit++;
-        }
-
-        last = k%10;
-        if (digit > 1){
-            first = k/(10*(digit-1));  //   アホやん
-        }
-        else{
-            first = last;
-        }
-
-        cout << "k = " << k << endl;
-        cout << "digit = " << digit << endl;
-        cout << first << " " << last << endl;
+    int i;
+    for (i=0; i<10; i++){
+        a.at(i) = i;
     }
 
+    for (i=0; i<5; i++){
+        cout << a.at(i) << " ";
+    }
+    cout << endl;
+
+    for (i=0; i<10; i++){
+        cout << a.at(i) << " ";
+    }
+    cout << endl;
+
+    return 0;
 }
