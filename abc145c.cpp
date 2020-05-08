@@ -23,10 +23,8 @@ int main(){
     permutation(0, n);
     
     /*
-    //  ここで順列を表示しようとすると範囲外エラーになるのはなぜ？
-    cout << "--- permutation ---" << endl;
     for (i=0; i<pvec.size(); i++){
-        for (int j=0; i<10; j++){
+        for (int j=0; j<n; j++){
             cout << pvec.at(i).at(j) << " ";
         }
         cout << endl;
