@@ -22,13 +22,16 @@ int main(){
 
     permutation(0, n);
     
+    /*
+    //  ここで順列を表示しようとすると範囲外エラーになるのはなぜ？
     cout << "--- permutation ---" << endl;
     for (i=0; i<pvec.size(); i++){
-        for (int j=0; i<n; j++){
+        for (int j=0; i<10; j++){
             cout << pvec.at(i).at(j) << " ";
         }
         cout << endl;
     }
+    */
     
     int x_diff_tmp = 0, y_diff_tmp = 0;
     double x_diff = 0, y_diff = 0, diff = 0;
@@ -40,16 +43,21 @@ int main(){
             y_diff_tmp = pos.at(pvec.at(i).at(j)).second - pos.at(pvec.at(i).at(j-1)).second; 
             y_diff = y_diff_tmp*y_diff_tmp;
             diff += sqrt(x_diff + y_diff);
+
+            /*
             cout << "x = " << pos.at(pvec.at(i).at(j-1)).first << "\ty = " << pos.at(pvec.at(i).at(j-1)).second << endl;
             cout << "x = " << pos.at(pvec.at(i).at(j)).first << "\ty = " << pos.at(pvec.at(i).at(j)).second << endl;
             cout << "i: " << i << "\tdiff = " << diff << endl;
+            */
+
         }
     }
 
     double ave;
     ave = diff/pvec.size();
     
-    cout << "pvec.size() = " << pvec.size() << endl;        //  debug
+//    cout << "pvec.size() = " << pvec.size() << endl;        //  debug
+    cout << fixed << setprecision(15);
     cout << ave << endl;
     return 0;
 }
