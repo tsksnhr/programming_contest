@@ -3,9 +3,15 @@ using namespace std;
 
 int main(){
 
-    double a,b;
-    cin >> a >> b;
+    vector<int> a(10, 10);
 
-    cout << (atan(b/a)*180)/3.1415 << endl;
+    for (int &x: a){
+        x = 0;
+    }
+
+    for (int x: a){
+        cout << x << " ";
+    }
+
     return 0;
 }
