@@ -13,8 +13,8 @@ int main(){
         cin >> A.at(i);
     }
 
-    long long pos = 0;
-    long long rpos = 0;
+    long long pos = 1;
+    long long rpos = 1;     
     long long fmove = 0;
     long long rmove = 0;
     long long last_move = 0;
@@ -44,6 +44,7 @@ int main(){
     //  ループに入るまでの移動回数がループより大きい場合、ここで引かないとNG
     last_move = (K-fmove)%rmove;
 
+    //  ループに入る前にkの制限で終わるケースが考慮できていない
     pos = rpos;
     for (int i=0; i<last_move; i++){
         pos = A.at(pos);
