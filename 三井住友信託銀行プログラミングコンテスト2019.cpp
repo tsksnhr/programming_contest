@@ -12,6 +12,8 @@ int main(){
     int aflg = 0, bflg = 0, cflg = 0, cnt = 0, tmp, flg = 0;
     vector<int> ans;
 
+    clock_t start = clock();
+
     for (int a=0; a<10; a++){
         for (int b=0; b<10; b++){
             for (int c=0; c<10; c++){
@@ -53,11 +55,17 @@ int main(){
             }
         }
     }
+
+    clock_t end = clock();
 /*
     for (int x: ans){
         cout << x << endl;
     }
 */
+
+    const double time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000.0;
+    //printf("time %lf[ms]\n", time);
+    cout << time << "ms" << endl;
     cout << cnt << endl;
     return 0;
 }
