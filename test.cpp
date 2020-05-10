@@ -3,15 +3,12 @@ using namespace std;
 
 int main(){
 
-    vector<int> a(10, 10);
+    int a = 1;
+    char b;
+    b = (to_string(a)).at(0);
 
-    for (int &x: a){
-        x = 0;
-    }
-
-    for (int x: a){
-        cout << x << " ";
-    }
+    cout << "int a = " << a << endl;
+    cout << "(char)a = " << b << endl;
 
     return 0;
 }
