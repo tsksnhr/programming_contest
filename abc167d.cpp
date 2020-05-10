@@ -29,12 +29,6 @@ int main(){
         pos = A.at(pos);
         Acnt.at(pos)++;
         move++;
-        /*
-        if ((Acnt.at(pos) == 2) && (fflg == false)){
-            fmove = move;
-            fflg = true;
-        }
-        */
         if (Acnt.at(pos) == 3){
             rstart = pos;
             break;
@@ -52,33 +46,13 @@ int main(){
         }
     }
 
-//    last_move = (K - fmove)%rmove;
     last_move = (K)%rmove;
 
-    /*
-    cout << "move=" << move << endl;
-    cout << "rstart=" << rstart << endl;
-    cout << "fmove=" << fmove << endl;
-    cout << "rmove=" << rmove << endl;
-    cout << "last_move=" << last_move << endl;
-    */
-
-//    pos = A.at(1);
     pos = 1;
     for (int i=0; i<last_move; i++){
         pos = A.at(pos);
-//        cout << "pos=" << pos << endl;
     }
-
-    /*
-    for (ans_pos=1; ans_pos<N+1; ans_pos++){
-        if(A.at(ans_pos) == pos){
-            ans = ans_pos;
-        }
-    }
-    */
 
     cout << pos << endl;
-//    cout << ans << endl;
     return 0;
 }
