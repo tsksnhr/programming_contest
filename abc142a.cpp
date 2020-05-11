@@ -6,16 +6,18 @@ int N;
 int main(){
 
     cin >> N;
-    double ans;
+    double temp, ans;
 
     if (N%2 == 0){
-        ans = N/2;
-        cout << ans << endl;
+        temp = N/2.0;
+        ans = temp/N;
     }
     else{
-        ans = ((int)(N/2))/N;
-        cout << ans << endl;
+        temp = N/2 + 1;
+        ans = temp/N;
     }
 
+    cout << fixed << setprecision(15);
+    cout << ans << endl;
     return 0;
 }
