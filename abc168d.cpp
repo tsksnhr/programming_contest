@@ -9,6 +9,9 @@ int main(){
 
     int n, m;
     cin >> n >> m;
+    // ある点からある点への経路を格納する二次元配列(点の数nだけ行があり、点から点への経路数は最大しかわからないのでn行0列の二次元配列)
+    // aからb, bからaの両方の方向を検討するために順番を入れ替えて二次元配列に代入する
+    // あらかじめ二次元配列をn*nで用意してat(a).at(b)とした場合、先に0がキューに格納されると距離がその後更新されなくなる
     vector<vector<int>> graph(n);
     for (int i=0; i<m; ++i){
         int a, b;
@@ -20,7 +23,7 @@ int main(){
         graph.at(a).push_back(b);
         graph.at(b).push_back(a);
         /*
-        // aからb, bからaの両方の方向を検討するために順番を入れ替えて二次元配列に代入する
+        // これはNG
         graph.at(a).at(b);
         graph.at(b).at(a);
         */
@@ -61,7 +64,6 @@ int main(){
 
     cout << "Yes" << endl;
     for (int i=1; i<n; ++i){
-//        int ans = ++pre.at(i);
         int ans = pre.at(i);
         ++ans;
         cout << ans << endl;
