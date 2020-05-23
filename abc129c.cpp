@@ -6,7 +6,7 @@ const ll MOD = 1e9+7;
 
 ll Step(int num);
 
-ll cnt = 0;
+ll cnt = 0, dbg = 0;
 int n, m;
 map<int, int> hole;
 vector<ll> memo(1e5+3, -1);
@@ -21,8 +21,10 @@ int main(){
     }
 
     cnt = Step(n);
+//    dbg = Step(2);
 
     cout << cnt << endl;
+//    cout << dbg << endl;
     return 0;
 }
 
@@ -35,10 +37,9 @@ ll Step(int num){
         if (memo.at(num) != -1){
             return memo.at(num)%MOD;
         }
-        // num==2の時の値を1にするとサンプル3は通るけどサンプル1が通らない
-        // num==2の時の値を2にするとサンプル1は通るけどサンプル3が通らない
-        else if (num <= 2){
-            return num;
+        // num==2の時の値を2にすると、num==1がholeの時の結果が不整合
+        else if (num <= 1){
+            return 1;
     //        return 1;
         }
         else{
