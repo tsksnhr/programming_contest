@@ -1,42 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-const ll mod = 1e9+7;
+
+const ll MOD = 1e9+7;
+
+ll Step(int num);
 
 ll cnt = 0;
-
-void dfs(int pos, int end, map<int, int> dict){
-
-    if (pos == end){
-        cnt++;
-        cnt = cnt%mod;
-        return;
-    }
-    else if (dict.count(pos)){
-        return;
-    }
-    else if (pos > end){
-    	return;
-    }
-    else{
-        dfs(pos+1, end, dict);
-        dfs(pos+2, end, dict);
-    }
-}
+int n, m;
+map<int, int> hole;
+vector<ll> memo(1e5+3, -1);
 
 int main(){
 
-    int n, m;
     cin >> n >> m;
-    map<int, int> dict;
-    int i;
-    for (i=0; i<n; i++){
+    for (int i=0; i<m; ++i){
         int temp;
         cin >> temp;
-        dict[temp]++;
+        hole[temp]++;
     }
 
-    dfs(0, n, dict);
+    cnt = Step(n);
+
     cout << cnt << endl;
     return 0;
+}
+
+ll Step(int num){
+
+    if (hole.count(num)){
+        return memo.at(num) = 0;
+    }
+    else{
+        if (memo.at(num) != -1){
+            return memo.at(num)%MOD;
+        }
+        // num==2の時の値を1にするとサンプル3は通るけどサンプル1が通らない
+        // num==2の時の値を2にするとサンプル1は通るけどサンプル3が通らない
+        else if (num <= 2){
+            return num;
+    //        return 1;
+        }
+        else{
+            return memo.at(num) = (Step(num - 1)%MOD + Step(num - 2)%MOD)%MOD;
+        }
+    }
 }
