@@ -13,6 +13,7 @@ int main(){
     ll thr = sqrt(N);
     bool flg = false;
 
+    // 素因数分解
     if (buf == 1) {
         cout << 0 << endl;
         return 0;
@@ -26,11 +27,12 @@ int main(){
             }
         }
 
-        if (flg == false) {
+        if (buf != 1) {
             divisor[N]++;
         }
     }
 
+    // 次数をカウント
     ll ans = 0;
     for (auto p: divisor){
         auto value = p.second;
