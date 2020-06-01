@@ -23,10 +23,11 @@ int main(){
             while (buf%div == 0){
                 buf /= div;
                 divisor[div]++;
-                flg = true;
+//                flg = true;       // このフラグはいらない
             }
         }
 
+        // flgをチェックする方法の場合、N=2*xxといった形だと素因数の数え漏れが発生する
         if (buf != 1) {
             divisor[N]++;
         }
