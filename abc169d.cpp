@@ -10,15 +10,27 @@ int main(){
     ll buf = N;
     map<ll, ll> divisor;
     ll div = 2;
+    ll thr;
+    thr = sqrt(N);
+    bool flg = false;
 
-    if (buf == 1) divisor[0] = 1;
+    if (buf == 1) {
+        cout << 0 << endl;
+        return 0;
+    }
     else{
         while (buf != 1){
             while (buf%div == 0){
                 buf /= div;
                 divisor[div-1]++;
+                flg = true;
             }
             div++;
+
+            if ((div > thr) && (flg == false)) {
+                divisor[N]++;
+                break;
+            }
         }
     }
 
