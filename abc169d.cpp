@@ -10,27 +10,24 @@ int main(){
     ll buf = N;
     map<ll, ll> divisor;
     ll div = 2;
-    ll thr;
-    thr = sqrt(N);
+    ll thr = sqrt(N);
     bool flg = false;
 
     if (buf == 1) {
         cout << 0 << endl;
         return 0;
     }
-    else{
-        while (buf != 1){
+    else {
+        for (div=2; div<thr+1; div++){
             while (buf%div == 0){
                 buf /= div;
-                divisor[div-1]++;
+                divisor[div]++;
                 flg = true;
             }
-            div++;
+        }
 
-            if ((div > thr) && (flg == false)) {
-                divisor[N]++;
-                break;
-            }
+        if (flg == false) {
+            divisor[N]++;
         }
     }
 
@@ -39,12 +36,10 @@ int main(){
         auto value = p.second;
 
         int sub = 1;
-        while (value != 0){
+        while (value - sub >= 0){
             value -= sub;
             sub++;
             ans++;
-            
-            if (sub > value) break; 
         }
     }
 
