@@ -1,3 +1,6 @@
+//  反省1：A<Bと思い込んだ
+//  反省2：A,Bがそれぞれ行ったり来たりできると思い、問題を無駄に難しく解釈した
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
