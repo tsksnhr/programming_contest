@@ -1,14 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int exp(int a, int b){
+
+    if (b == 0) return 1;
+
+    return a*exp(a, b-1);
+}
+
 int main(){
 
-    int a = 1;
-    char b;
-    b = (to_string(a)).at(0);
+    int a, b;
+    cin >> a >> b;
 
-    cout << "int a = " << a << endl;
-    cout << "(char)a = " << b << endl;
-
+    cout << exp(a, b);
     return 0;
 }
