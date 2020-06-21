@@ -18,11 +18,15 @@ int main(){
 
         if (lbuf != rbuf){
             ans += 2;
+
+            //  削除するブロックの下にブロックがあるかどうかで処理が変わる
+            //  ブロックがある場合
             if(lpos_mem.size() != 0){
                 rpos++;
                 lpos = lpos_mem.at(lpos_mem.size()-1);
                 lpos_mem.pop_back();
             }
+            //  ブロックが無い場合
             else{
                 rpos += 2;
                 lpos = rpos-1;
