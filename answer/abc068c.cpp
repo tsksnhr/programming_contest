@@ -7,6 +7,9 @@ const ll INF = 1e16;
 
 void solver(int N, int M, vector<vector<int>> &ab, bool &flg){
 
+    //  do not sort
+    //  sort(ab.begin(), ab.end());
+
     queue<int> q;
     vector<int> cost(N+1, -1);
 
