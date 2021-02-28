@@ -1,13 +1,33 @@
 #include <bits/stdc++.h>
 using  namespace std;
+using ll = long long;
+
+void dfs(ll N, vector<bool> &seen, ll &cnt, ll &ans, vector<vector<ll>> graph, ll pos){
+
+    if (cnt == N-1){
+        ans++;
+    }
+    for (auto x: graph.at(pos)){
+        if (seen.at(x) == true) continue;
+        else{
+            seen.at(x) = true;
+            cnt++;
+            dfs(N, seen, cnt, ans, graph, x);
+        }
+    }
+
+    cnt--;
+    seen.at(pos) = false;
+    return;
+}
 
 int main(){
 
-    int N, M;
+    ll N, M;
     cin >> N >> M;
-    vector<vector<int>> graph(N);
-    for (int i = 0; i < M; i++){
-        int a, b;
+    vector<vector<ll>> graph(N);
+    for (ll i = 0; i < M; i++){
+        ll a, b;
         cin >> a >> b;
         a--;
         b--;
@@ -15,29 +35,13 @@ int main(){
         graph.at(b).push_back(a);
     }
 
-    vector<int> ref(N);
-    for (int i = 0; i < N; i++) ref.at(i) = i;
+    vector<bool> seen(N, false);
+    ll ans = 0;
+    ll cnt = 0;
 
-    int road_cnt = 0, ans = 0;
-    while (true){
-        int pos = 0, ref_pos = 1;
-        for (int i = 0; i < graph.at(pos).size(); i++){
-            if (graph.at(pos).at(i) == ref.at(ref_pos)){
-                road_cnt++;
-                ref_pos++;
-                pos = graph.at(pos).at(i);
-                i = 0;
-
-                if (ref_pos == N) break;
-            }
-        }
-        if (road_cnt == N-1){
-            ans++;
-        }
-        if (!next_permutation(ref.begin(), ref.end())) break;
-        road_cnt = 0;
-    }
-
+    seen.at(0) = true;
+    dfs(N, seen, cnt, ans, graph, 0);
+    
     cout << ans << endl;
     return 0;
 }

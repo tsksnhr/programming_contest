@@ -1,25 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-string S;
+using ll = long long;
 
 int main(){
 
+    string S;
     cin >> S;
 
-    int size = S.size();
-    int i, cnt_tmp = 0, cnt = 0;
-    for (i=0; i<size; i++){
-        if ((S.at(i) == 'A') || (S.at(i) == 'C') || (S.at(i) == 'G') || (S.at(i) == 'T')){
-            cnt_tmp++;
-        }
-        else{
-            cnt_tmp = 0;
-        }
-        //  この処理をelse内に入れると"AAAAA"などでcntが0のまま更新されない
-        cnt = max(cnt, cnt_tmp);
+    ll ans = 0;
+    ll tmp = 0;
+    for (ll i = 0; i < S.size(); i++){
+        char ch = S.at(i);
+        bool is_AGCT = false;
+        
+        if ((ch == 'A') || (ch == 'G') || (ch == 'C') || (ch == 'T')) is_AGCT = true;
+        if (is_AGCT) tmp++;
+        else tmp = 0;
+        
+        ans = max(ans, tmp);
     }
 
-    cout << cnt << endl;
+    cout << ans << endl;
     return 0;
 }
