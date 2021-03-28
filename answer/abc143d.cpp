@@ -1,33 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int n;
-vector<int> L(2000);
-vector<vector<int>> pvec;
-vector<int> p(2000);
-vector<int> used(2000);
+using ll = long long;
 
 int main(){
 
-    cin >> n;
-    int i;
-    for (i=0; i<n; i++){
-        cin >> L.at(i);
+    ll N;
+    cin >> N;
+    vector<ll> L(N);
+    for (ll i = 0;i < N; i++) cin >> L.at(i);
+    sort(L.begin(), L.end());
+
+    ll ans = 0;
+    for (ll i = N-1; i >= 0; i--){
+        for (ll j = i-1; j >= 0; j--){
+            ll target = L.at(i) + L.at(j);
+
+            // if thard-edge is longer than tharget (sum of first- and second-edge), it isn't suitabile for making triangle.
+            auto iter = lower_bound(L.begin(), L.end(), target);
+            ll ng = distance(iter, L.end());
+
+            // (N - 1 - i) are candidates of third-edge, ng is the number of unsuitable edge.
+            // this subtraction calcurates the number of suitable edge.
+            ans += (N - 1 - i) - ng;
+        }
     }
 
-
-
-
-}
-
-void permutation(int pos, int n_num){
-
-    if (pos == n_num){
-        return;
-    }
-
-    int i;
-    for (i=1; i<=n_num; i++){
-
-    }
+    cout << ans << endl;
+    return 0;
 }
