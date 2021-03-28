@@ -13,20 +13,23 @@ int main(){
     vector<ull> A(N);
     for (ll i = 0; i < N; i++) cin >> A.at(i);
 
-    ull ans = 0;
-    vector<ll> bit_cnt(30, 0);
-    for (ll i = 0; i < N; i++){
-        bitset<30> tmp(A.at(i));
+    ull ans = 1e18;
+    for (ll tmp = 0; tmp < (1 << N-1); tmp++){
+        bitset<31> separater(tmp);
+        ull bit_or = 0;
+        ull bit_xor = 0;
 
-        for (ll j = 0; j < 30; j++){
-            if (tmp.test(j)) bit_cnt.at(j)++;
+        for (ll cnt = 0; cnt < N; cnt++){
+            bit_or |= A.at(cnt);
+            
+            if ((cnt < N-1) && (separater.test(cnt))){
+                bit_xor ^= bit_or;
+                bit_or = 0;
+            }
         }
-    }
-    for (auto x: bit_cnt) cerr << x << " ";
-    cerr << endl;
-
-    for (ll i = 0; i < 30; i++){
-        if (bit_cnt.at(i) == 1) ans += (pow(2, i));
+        bit_xor ^= bit_or;
+        
+        ans = min(ans, bit_xor);
     }
 
     cout << ans << endl;
