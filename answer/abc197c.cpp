@@ -3,9 +3,6 @@ using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 
-// TODO: solve
-// How to: bit-search
-
 int main(){
 
     ll N;
