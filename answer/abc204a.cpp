@@ -1,4 +1,4 @@
-//
+// 	Rock-paper-scissors
 
 #include <bits/stdc++.h>
 using namespace std;
