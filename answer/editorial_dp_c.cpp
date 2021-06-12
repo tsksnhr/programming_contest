@@ -8,25 +8,29 @@ int main(){
 
     ll N;
     cin >> N;
-    vector<ll> A(N);
-    vector<ll> B(N);
-    vector<ll> C(N);
-    for (ll i = 0; i < N; i++) cin >> A.at(i) >> B.at(i) >> C.at(i);
+    vector<ll> A(N+10);
+    vector<ll> B(N+10);
+    vector<ll> C(N+10);
+    vector<vector<ll>> abc(N+10, vector<ll>(3, 0));
+    for (ll i = 0; i < N; i++){
+        for (ll j = 0; j < 3; j++){
+            cin >> abc.at(i).at(j);
+        }
+    }
 
-    vector<vector<ll>> dp(N, vector<ll>(3, 0));
+    vector<vector<ll>> dp(N+10, vector<ll>(3, 0));
 
-    dp.at(0).at(0) = A.at(0);
-    dp.at(0).at(1) = B.at(0);
-    dp.at(0).at(2) = C.at(0);
-
-    for (ll i = 1; i < N; i++){
-        dp.at(i).at(0) = max(dp.at(i-1).at(1) + A.at(i), dp.at(i-1).at(2) + A.at(i));
-        dp.at(i).at(1) = max(dp.at(i-1).at(0) + B.at(i), dp.at(i-1).at(2) + B.at(i));
-        dp.at(i).at(2) = max(dp.at(i-1).at(0) + C.at(i), dp.at(i-1).at(1) + C.at(i));
+    for (ll i = 0; i < N; i++){
+        for (ll j = 0; j < 3; j++){
+            for (ll k = 0; k < 3; k++){
+                if (j == k) continue;
+                dp.at(i+1).at(j) = max(dp.at(i+1).at(j), dp.at(i).at(k) + abc.at(i).at(k)); 
+            }
+        }
     }
 
     ll ans = 0;
-    ans = max(dp.back().at(0), max(dp.back().at(1), dp.back().at(2)));
+    for (ll i = 0; i < 3; i++) ans = max(ans, dp.at(N).at(i));
 
     cout << ans << endl;
     return 0;
