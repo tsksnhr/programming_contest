@@ -8,9 +8,6 @@ int main(){
 
     ll N;
     cin >> N;
-    vector<ll> A(N+10);
-    vector<ll> B(N+10);
-    vector<ll> C(N+10);
     vector<vector<ll>> abc(N+10, vector<ll>(3, 0));
     for (ll i = 0; i < N; i++){
         for (ll j = 0; j < 3; j++){
