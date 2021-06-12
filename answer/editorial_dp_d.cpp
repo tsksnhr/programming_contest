@@ -8,17 +8,18 @@ int main(){
 
     ll N, W;
     cin >> N >> W;
-    vector<ll> w(N);
-    vector<ll> v(N);
+    vector<ll> w(N+10);
+    vector<ll> v(N+10);
     for (ll i = 0; i < N; i++) cin >> w.at(i) >> v.at(i);
 
-    vector<vector<ll>> dp(N, vector<ll>(W+1, 0));
-    dp.at(0).at(w.at(0)) = v.at(0);
+    vector<vector<ll>> dp(N+10, vector<ll>(W+10, 0));
 
-    for (ll i = 1; i < N; i++){
-        for (ll j = 0; j <= W; j++){
-            dp.at(i).at(j) = max(dp.at(i-1).at(j), dp.at(i).at(j));
-            if (j + w.at(i) <= W) dp.at(i).at(j + w.at(i)) = max(dp.at(i-1).at(j) + v.at(i), dp.at(i-1).at(j));
+    for (ll i = 0; i < N; i++){
+        for (ll sum_w = 0; sum_w <= W; sum_w++){
+
+            if (sum_w - w.at(i) >= 0) dp.at(i+1).at(sum_w) = max(dp.at(i+1).at(sum_w), dp.at(i).at(sum_w - w.at(i)) + v.at(i));
+
+            dp.at(i+1).at(sum_w) = max(dp.at(i+1).at(sum_w), dp.at(i).at(sum_w));
         }
     }
 /*
@@ -27,9 +28,6 @@ int main(){
         cerr << endl;
     }
 */
-    ll ans = 0;
-    for (auto x: dp.back()) ans = max(ans, x);
-
-    cout << ans << endl;
+    cout << dp.at(N).at(W) << endl;
     return 0;
 }
