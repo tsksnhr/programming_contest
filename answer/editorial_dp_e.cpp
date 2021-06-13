@@ -20,19 +20,19 @@ int main(){
     }
 
     vector<vector<ll>> dp(N+10, vector<ll>(V_max+10, W_max));
-//    for (ll i = 0; i < N; i++) dp.at(0).at(v.at(i)) = 0;
+    dp.at(0).at(0) = 0;
 
     ll ans = -1;
-    for (ll i = N; i >= 0; i--){
-        for (ll j = V_max; j >= 0; j--){
+    for (ll i = 0; i < N; i++){
+        for (ll j = 0; j <= V_max; j++){
             
             if (j - v.at(i) >= 0){
-                dp.at(i).at(j - v.at(i)) = min(dp.at(i).at(j - v.at(i)), dp.at(i+1).at(j) - w.at(i));
+                dp.at(i+1).at(j) = min(dp.at(i+1).at(j), dp.at(i).at(j - v.at(i)) + w.at(i));
             }
             
-            dp.at(i).at(j) = min(dp.at(i).at(j), dp.at(i+1).at(j));
+            dp.at(i+1).at(j) = min(dp.at(i+1).at(j), dp.at(i).at(j));
 
-            if (dp.at(i).at(j) <= W) ans = max(ans, j);
+            if (dp.at(i+1).at(j) <= W) ans = max(ans, j);
         }
     }
 /*
