@@ -16,41 +16,33 @@ int main(){
     for (ll i = 0; i < N; i++){
         cin >> A.at(i);
 
-        if (i != 0) A_dif.at(i) = abs(A.at(i) - A.at(i-1));
-        sum += A_dif.at(i);
+        if (i != 0) A_dif.at(i) = A.at(i-1) - A.at(i);
+        sum += abs(A_dif.at(i));
     }
 
     ll ans = sum;
-    vector<ll> change(N_max, 0);
     for (ll i = 0; i < Q; i++){
         ll left, right, value;
         cin >> left >> right >> value;
         left--;
         right--;
 
-        A.at(left) += value;
-        if (left != right) A.at(right) += value;
-
-//        for (ll j = left; j <= right; j++) A.at(j) += value;
-
-        ll l_dif = 0, l_dif_pre = 0, r_dif = 0, r_dif_pre = 0;
-        if (left > 0){
-            l_dif = abs(A.at(left-1) - A.at(left));
-            l_dif_pre = l_dif;
-
-            l_dif = l_dif - A_dif.at(left);
-            A_dif.at(left) = l_dif_pre;
+        ll l_dif = 0, r_dif = 0;
+        if (left != 0){
+            l_dif = A_dif.at(left);
+            l_dif -= value;
         }
-        if (right < N-1){
-            r_dif = abs(A.at(right+1) - A.at(right));
-            r_dif_pre = r_dif;
-
-            r_dif = r_dif - A_dif.at(right+1);
-            A_dif.at(right+1) = r_dif_pre;
+        if (right != N-1){
+            r_dif = A_dif.at(right+1);
+            r_dif += value;
         }
-        ans += (l_dif + r_dif);
 
+        ans += (abs(l_dif) - abs(A_dif.at(left)));
+        ans += (abs(r_dif) - abs(A_dif.at(right+1)));
         cout << ans << endl;
+
+        A_dif.at(left) = l_dif;
+        A_dif.at(right+1) = r_dif;
     }
 
     return 0;
