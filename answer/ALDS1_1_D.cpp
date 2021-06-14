@@ -1,33 +1,35 @@
-#include<bits/stdc++.h>
+// Maximum Profit
+
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 
-void solver(int n, vector<ll> &a, ll &ans){
-
-    ll max_dif = (ll)(1e9*-1);
-    ll min_cost = a.at(0);
-
-    for( int i = 1; i < n; ++i){
-        max_dif = max(max_dif, a.at(i)-min_cost);
-        min_cost = min(min_cost, a.at(i));
-    }
-    ans = max_dif;
-
-    return; 
-}
+const ll LOW_INF = -1*1e10;
 
 int main(){
 
-    int n;
-    cin >> n;
-    vector<ll> a(n);
-    for( int i = 0; i < n; ++i){
-        cin >> a.at(i);
+    ll N;
+    cin >> N;
+    vector<ll> R(N);
+    for (ll i = 0; i < N; i++) cin >> R.at(i);
+
+    ll ans_high = 0, ans_low = LOW_INF, buf = 0;
+    bool is_up = false;
+    for (ll i = 0; i < N-1; i++){
+        ll dif = R.at(i+1) - R.at(i);
+
+        if (dif < 0) ans_low = max(ans_low, dif);
+        else{
+            is_up = true;
+            if (buf < 0) buf = 0;
+        }
+        buf += dif;
+        ans_high = max(ans_high, buf);
     }
 
-    ll ans{};
-    solver(n, a, ans);
+    if (is_up) cout << ans_high;
+    else cout << ans_low;
+    cout << endl;
 
-    cout << ans << endl;
     return 0;
 }
