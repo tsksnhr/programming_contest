@@ -10,26 +10,19 @@ int main(){
 
     ll N;
     cin >> N;
-    vector<ll> R(N);
-    for (ll i = 0; i < N; i++) cin >> R.at(i);
 
-    ll ans_high = 0, ans_low = LOW_INF, buf = 0;
-    bool is_up = false;
-    for (ll i = 0; i < N-1; i++){
-        ll dif = R.at(i+1) - R.at(i);
+    ll R_min;
+    cin >> R_min;
 
-        if (dif < 0) ans_low = max(ans_low, dif);
-        else{
-            is_up = true;
-            if (buf < 0) buf = 0;
-        }
-        buf += dif;
-        ans_high = max(ans_high, buf);
+    ll ans = LOW_INF;
+    for (ll i = 1; i < N; i++){
+        ll R_now;
+        cin >> R_now;
+
+        ans = max(ans, R_now - R_min);
+        R_min = min(R_min, R_now);
     }
 
-    if (is_up) cout << ans_high;
-    else cout << ans_low;
-    cout << endl;
-
+    cout << ans << endl;
     return 0;
 }
