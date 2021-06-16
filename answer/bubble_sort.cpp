@@ -18,11 +18,12 @@ int bubble_sort(int N, vector<int> &A){
 
     int cnt = 0;
     bool is_OK = 0;
+    int pos = 0;
 
     while (!is_OK){
         is_OK = 1;
 
-        for (int i = N-1; i > 0; i--){
+        for (int i = N-1; i > pos; i--){
             if (A.at(i-1) > A.at(i)){
                 int tmp = A.at(i);
                 A.at(i) = A.at(i-1);
@@ -31,6 +32,7 @@ int bubble_sort(int N, vector<int> &A){
                 cnt++;
             }
         }
+        pos++;
     }
 
     return cnt;
