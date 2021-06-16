@@ -12,9 +12,9 @@ void insertion_sort(vector<int> &array){
 
         while (j >= 0 && array.at(j) > value){
             array.at(j+1) = array.at(j);
-            array.at(j) = value;
             j--;
         }
+        array.at(j+1) = value;
 
         for (int i = 0; i < size-1; i++) cout << array.at(i) << " ";
         cout << array.back() << endl;
