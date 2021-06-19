@@ -5,6 +5,18 @@
 using namespace std;
 using ll = long long;
 
+bool linear_search(int key, vector<ll> array){
+
+    int pos = 0;
+    array.push_back(key);
+    int size = array.size();
+
+    while(array.at(pos) != key) pos++;
+
+    if (pos == size-1) return false;
+    else return true;
+}
+
 int main(){
 
     int N;
@@ -19,7 +31,8 @@ int main(){
     ll cnt = 0;
     for (int j = 0; j < Q; j++){
         for (int i = 0; i < N; i++){
-            if (S.at(i) == T.at(j)){
+            ll key = T.at(j);
+            if (linear_search(key, S)){
                 cnt++;
                 break;
             }
