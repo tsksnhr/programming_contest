@@ -5,7 +5,7 @@
 using namespace std;
 using ll = long long;
 
-bool linear_search(int key, vector<ll> array){
+bool linear_search(int key, vector<ll> &array){
 
     int pos = 0;
     array.push_back(key);
@@ -30,12 +30,9 @@ int main(){
 
     ll cnt = 0;
     for (int j = 0; j < Q; j++){
-        for (int i = 0; i < N; i++){
-            ll key = T.at(j);
-            if (linear_search(key, S)){
-                cnt++;
-                break;
-            }
+        ll key = T.at(j);
+        if (linear_search(key, S)){
+            cnt++;
         }
     }
 
