@@ -21,7 +21,7 @@ void countingsort(ll key, ll size){
         cnt[i] += cnt[i-1];
     }
 
-    for (int i = 0; i < size; i++){
+    for (int i = size-1; i >= 0; i--){
         A_out[cnt[A_in[i]]] = A_in[i];
         cnt[A_in[i]]--;
     }
