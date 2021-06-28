@@ -101,12 +101,19 @@ void GetDegree(Node *Trees, int node_id){
     return;
 }
 
-void GetHeight(Node *Trees, int node_id, int now_height){
+int GetHeight(Node *Trees, int node_id){
 
-    Trees[node_id].height = max(now_height, Trees[node_id].height);
+    int h_left = 0, h_right = 0;
+    if (Trees[node_id].left_child != NIL){
+        h_left = GetHeight(Trees, Trees[node_id].left_child) + 1; 
+    }
+    if (Trees[node_id].right_child != NIL){
+        h_right = GetHeight(Trees, Trees[node_id].right_child) + 1; 
+    }
 
-    if (Trees[node_id].parent != NIL) GetHeight(Trees, Trees[node_id].parent, now_height + 1);
-    return;    
+    int h = max(h_left, h_right);
+    Trees[node_id].height = h;
+    return h;
 }
 
 int main(){
@@ -122,8 +129,9 @@ int main(){
     for (int i = 0; i < N; i++){
         GetDegree(Trees, i);
 
-        if (Trees[i].parent == NIL) GetDepth(Trees, i, 0);
-        if (Trees[i].left_child == NIL && Trees[i].right_child == NIL) GetHeight(Trees, i, 0);
+        if (Trees[i].parent != NIL) continue;
+        GetDepth(Trees, i, 0);
+        GetHeight(Trees, i);
     }
 
     for (int i = 0;  i< N; i++){
