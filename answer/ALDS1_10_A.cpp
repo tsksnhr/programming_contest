@@ -1,26 +1,36 @@
+// Fibonacci Number
+
 #include <bits/stdc++.h>
+
 using namespace std;
 using ll = long long;
 
-ll fib(ll n, vector<ll> &dp){
+ll Fibonacci(ll *dp, ll n){
 
-    if (dp.at(n) != -1){
-        return dp.at(n);
+    if (n == 0 || n == 1){
+        dp[n] = 1;
+        return dp[n];
     }
-    else if ((n == 0) || (n == 1)) return 1;
+
+    if (dp[n] != -1){
+        return dp[n];
+    }
     else{
-        return dp.at(n) = fib(n-1, dp) + fib(n-2, dp);
+        dp[n] = Fibonacci(dp, n-1) + Fibonacci(dp, n-2);
+        return dp[n];
     }
 }
 
 int main(){
 
-    ll n;
-    cin >> n;
+    int N;
+    cin >> N;
 
-    vector<ll> dp(n+1, -1);
-    ll ans = fib(n, dp);
+    ll dp[50];
+    for (int i = 0; i <= N; i++) dp[i] = -1;
 
-    cout << ans << endl;
+    Fibonacci(dp, N);
+    
+    cout << dp[N] << endl;
     return 0;
 }
