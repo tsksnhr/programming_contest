@@ -1,58 +1,69 @@
+// Depth First Search
+
 #include <bits/stdc++.h>
+
 using namespace std;
 using ll = long long;
 
-void dfs(ll N, vector<vector<ll>> &graph, vector<bool> &seen, ll &time_stump, vector<ll> &in_time, vector<ll> &out_time, ll &pos){
+void DFS(int N, vector<vector<int>> &graph, int pos, int &t_through, vector<int> &t_visit, vector<int> &t_back){
 
-    seen.at(pos) = true;
-    time_stump++;
-    in_time.at(pos) = time_stump;
-
-    for (auto x: graph.at(pos)){
-        if (seen.at(x) == true) continue;
-        else dfs(N, graph, seen, time_stump, in_time, out_time, x);
+    if (t_visit.at(pos) == 0){
+        t_through++;
+        t_visit.at(pos) = t_through;
     }
-    time_stump++;
-    out_time.at(pos) = time_stump;
+
+    for (auto next: graph.at(pos)){
+        if (t_visit.at(next) != 0) continue;
+        DFS(N, graph, next, t_through, t_visit, t_back);
+    }
+
+    if (t_back.at(pos) == 0){
+        t_through++;
+        t_back.at(pos) = t_through;
+    }
     
+    return;
+}
+
+void AnsPrint(int N, vector<vector<int>> &graph, vector<int> &t_visit, vector<int> &t_back){
+
+    for (int i = 0; i < N; i++){
+        int node = i + 1;
+        cout << node;
+        cout << " " << t_visit.at(i);
+        cout << " " << t_back.at(i);
+        cout << endl;
+    }
+
     return;
 }
 
 int main(){
 
-    ll N;
+    int N;
     cin >> N;
-    vector<vector<ll>> graph(N);
-    for (ll i = 0; i < N; i++){
-        ll idx, outdegree;
-        cin >> idx >> outdegree;
-        idx--;
-
-        for (ll j = 0; j < outdegree; j++){
-            ll buf;
-            cin >> buf;
-            buf--;
-
-            graph.at(idx).push_back(buf);
+    vector<vector<int>> graph(N);
+    for (int i = 0;  i< N; i++){
+        int node, deg;
+        cin >> node >> deg;
+        node--;
+        
+        for (int j = 0; j < deg; j++){
+            int next;
+            cin >> next;
+            next--;
+            graph.at(node).push_back(next);
         }
     }
 
-    vector<bool> seen(N, false);
-    ll time_stump = 0;
-    ll pos = 0;
-    vector<ll> in_time(N, -1);
-    vector<ll> out_time(N, -1);
-
-    // Move start positions for loop and no-output point
-    for (ll pos = 0; pos < N; pos++){
-        if (seen.at(pos) == true) continue;
-        else dfs(N, graph, seen, time_stump, in_time, out_time, pos);
+    int t_through = 0;
+    vector<int> t_visit(N);
+    vector<int> t_back(N);
+    for (int i = 0; i < N; i++){
+        DFS(N, graph, i, t_through, t_visit, t_back);
     }
 
-    for (ll i = 0; i < N; i++){
-        ll idx = i + 1;
-        cout << idx << " " << in_time.at(i) << " " << out_time.at(i) << endl;;
-    }
+    AnsPrint(N, graph, t_visit, t_back);
 
     return 0;
 }
