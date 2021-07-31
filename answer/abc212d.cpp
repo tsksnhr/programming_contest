@@ -1,5 +1,4 @@
 // Querying Multiset
-// TODO: read editorial and solve
 
 #include <bits/stdc++.h>
 
@@ -11,10 +10,9 @@ int main(){
 
     int Q;
     cin >> Q;
-    priority_queue<P, vector<P>, greater<P>> ball_data;
-    vector<ll> sum_array(Q+3, 0);
-    int pos = 0;
-
+    priority_queue<ll, vector<ll>, greater<ll>> ball_data;
+    ll sum = 0;
+    
     for (int i = 0; i < Q; i++){
         int command;
         ll X;
@@ -22,28 +20,20 @@ int main(){
 
         if (command == 1){
             cin >> X;
-            P tmp_p;
-            tmp_p.first = X;
-            tmp_p.second = pos;
-
-            ball_data.push(tmp_p);
+            X -= sum;
+            ball_data.push(X);
         }
         else if (command == 2){
             cin >> X;
-            pos++;
-            sum_array.at(pos) = sum_array.at(pos-1) + X;
+            sum += X;
         }
         else{
-            // for (auto x: sum_array) cerr << x << " ";
-            // cerr << endl;
 
-            P tmp_p = ball_data.top();
+            ll tmp = ball_data.top();
             ball_data.pop();
+//            cerr << tmp << " " << sum << endl;
 
-            ll add = 0;
-            if (pos != tmp_p.second) add = sum_array.at(pos) - sum_array.at(tmp_p.second);
-
-            ll ans = tmp_p.first + add; 
+            ll ans = tmp + sum; 
             cout << ans << endl;
         }
     }
