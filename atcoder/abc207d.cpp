@@ -1,4 +1,5 @@
-// 
+// Congruence Points
+// TODO: solve
 
 #include <bits/stdc++.h>
 
@@ -28,19 +29,19 @@ int main(){
             c = T.at(j).first;
             d = T.at(j).second;
 
-            if (a*c > 0) a *= -1;
-            int x_dif = abs(a) - abs(c);
-            if (a*c > 0) S_buf.at(j).first *= -1;
+            int move = 0;
+            if (a*c > 0) move = 2*a*(-1);
+            int x_dif = a - c;
+            move += x_dif;
             S_buf.at(j).first += x_dif;
 
-            int y_dif = abs(b) - abs(d);
-            S_buf.at(j).second += y_dif;
+            int y_dif = b - d;
+            S_buf.at(j).second += y_dif*(-1);
 
             for (int k = 0; k < N; k++){
                 if (k == j) continue;
-                if (a*c > 0) S_buf.at(k).first *= -1;
-                S_buf.at(k).first += x_dif;
-                S_buf.at(k).second += y_dif;
+                S_buf.at(k).first += move;
+                S_buf.at(k).second += y_dif*(-1);
             }
 
             for (int l = 0; l < N; l++){

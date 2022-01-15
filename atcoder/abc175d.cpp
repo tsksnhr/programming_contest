@@ -14,7 +14,7 @@ int main(){
     for(int i=0; i<N; i++) cin >> C.at(i);
     
     ll score_buf{}, pos_buf{}, cnt_buf{}, pos_mem{};
-    ll roop_score_max = -1e15, score_end = -1e15, pos{}, cnt = 1;
+    ll roop_score_max = -1e18, score_end = -1e18, pos{}, cnt = 1;
     for(int i=0; i<N; i++){
         pos_mem = i;
         pos_buf = i;

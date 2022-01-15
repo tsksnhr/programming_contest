@@ -15,6 +15,8 @@ int ctoi(char buf){
     if (buf == '9') return 9;
 }
 
+// TODO: solve
+
 int main(){
     
     ll K;
@@ -43,45 +45,50 @@ int main(){
     for (ll i = 0; i < 10; i++){
         base_aoki_score += pow(10, aoki_card.at(i))*i;
     }
-//    cerr << base_takahashi_score << " " << base_aoki_score << endl;
-
+    
     ll winnable = 0;
     for (ll i = 1; i < 10; i++){
+        ll winnable_buf = 0;
+        ll takahashi_score = base_takahashi_score;
+
+        // reduce card-num 
         if (remaining_card.at(i) == 0) continue;
-        remaining_card.at(i)--;
+        else{
+            winnable_buf = remaining_card.at(i);
+            remaining_card.at(i)--;
+        }
+
+        // cacl takahashi's score
+        takahashi_card.at(i)++;
+        if (takahashi_card.at(i) != 1){
+            takahashi_score -= pow(10, takahashi_card.at(i)-1)*i;
+        }
+        takahashi_score += pow(10, takahashi_card.at(i))*i;
+        takahashi_card.at(i)--;
 
         for (ll j = 1; j < 10; j++){
-            if (remaining_card.at(j) == 0) continue;
-//            cerr << i << " " << j << endl;
-
-            ll takahashi_score = base_takahashi_score;
             ll aoki_score = base_aoki_score;
-//            cerr << takahashi_score << " " << aoki_score << endl;
 
-            takahashi_card.at(i)++;
-            if (takahashi_card.at(i) != 1){
-                takahashi_score -= pow(10, takahashi_card.at(i-1))*i;
-            }
-            takahashi_score += pow(10, takahashi_card.at(i))*i;
-            takahashi_card.at(i)--;
+            if (remaining_card.at(j) == 0) continue;
 
+            // calc aoki's score
             aoki_card.at(j)++;
             if (aoki_card.at(j) != 1){
-                aoki_score -= pow(10, aoki_card.at(j-1))*j;
+                aoki_score -= pow(10, aoki_card.at(j)-1)*j;
             }
             aoki_score += pow(10, aoki_card.at(j))*j;
             aoki_card.at(j)--;
 
-//            cerr << takahashi_score << " " << aoki_score << endl;
+            // calc winnable case
             if (takahashi_score > aoki_score){
-                winnable++;
-                cerr << i << " " << j << endl;
+                winnable += winnable_buf*remaining_card.at(j);
             }
         }
+        remaining_card.at(i)++;
     }
-//    cerr << winnable << endl;
+
     double ans = 0;
-    ans = (double)winnable/(double)((9*K - 8)*(9*K - 9));
+    ans = (double)winnable/(9*K - 8)/(9*K - 9);
 
     cout << fixed << setprecision(10);
     cout << ans << endl;
