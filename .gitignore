@@ -3,4 +3,7 @@
 answer/.vscode/settings.json
 
 *.exe
-test.*
+
+test.c
+test.cpp
+test.py
