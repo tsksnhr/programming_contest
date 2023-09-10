@@ -1,9 +1,11 @@
-.vscode/launch.json
-.vscode/settings.json
-answer/.vscode/settings.json
+.vscode/
 
 *.exe
 
-test.c
-test.cpp
-test.py
+test.*
+
+*.o
+*.s
+
+__pycache__
+*.pyc
